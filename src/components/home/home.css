@@ -1,0 +1,75 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    height: 100%;
+    margin: 100px auto;
+    background: #161a2b;
+    width: 520px;
+    min-height: 640px;
+    border-radius: 50px;
+}
+
+.logo {
+    max-width: 70%;
+    max-height: 70%;
+    padding: 20px;
+}
+
+.new-room {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.new-room-title {
+    font-size: 1.5em;
+}
+
+.home-btn {
+    padding: 8px 36px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(
+        90deg,
+        rgba(93, 12, 255, 1) 0%,
+        rgba(155, 0, 250, 1) 100%
+    );
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.home-button.edit {
+    background: linear-gradient(
+        90deg,
+        rgba(20, 159, 255, 1) 0%,
+        rgba(17, 122, 255, 1) 100%
+    );
+    padding: 16px 22px;
+}
+
+.home-input {
+    padding: 14px 32px 14px 16px;
+    border-radius: 4px 0 0 4px;
+    border: 2px solid #5d0cff;
+    outline: none;
+    width: 320px;
+    background: transparent;
+    color: #fff;
+}
+
+.home-input::placeholder {
+    color: #e2e2e2;
+}
+
+.home-input.edit {
+    border: 2px solid #149fff;
+}

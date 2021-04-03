@@ -28,7 +28,10 @@ function Home() {
             <Logo />
             <NewRoom />
             <ConnectRoom />
-            <button onClick={redirectRules} className="home-btn edit">
+            <button
+                onClick={redirectRules}
+                className="home-btn edit home-larger"
+            >
                 Szabályok
             </button>
         </div>

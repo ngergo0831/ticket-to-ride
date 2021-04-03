@@ -5,10 +5,11 @@
     justify-content: flex-start;
     text-align: center;
     height: 100%;
-    margin: 100px auto;
+    margin: 50px auto;
     background: #161a2b;
-    width: 520px;
+    width: 620px;
     min-height: 640px;
+    min-width: 620px;
     border-radius: 50px;
 }
 
@@ -23,13 +24,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     text-align: center;
     font-size: 1.2em;
 }
 
 .new-room-title {
     font-size: 1.5em;
+}
+
+.new-room-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 40px;
+}
+
+.new-room-input-items {
+    margin: 10px 20px;
+}
+
+.new-room-text {
+    min-width: 100px;
 }
 
 .home-btn {
@@ -45,6 +62,7 @@
     );
     color: #fff;
     text-transform: capitalize;
+    margin: 15px;
 }
 
 .home-button.edit {
@@ -61,7 +79,7 @@
     border-radius: 4px 0 0 4px;
     border: 2px solid #5d0cff;
     outline: none;
-    width: 320px;
+    width: 200px;
     background: transparent;
     color: #fff;
 }
@@ -72,4 +90,42 @@
 
 .home-input.edit {
     border: 2px solid #149fff;
+}
+
+.home-larger {
+    font-size: 1.2em;
+    margin: 30px;
+}
+
+.new-room-players {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.new-room-players__button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: linear-gradient(
+        90deg,
+        rgba(93, 12, 255, 1) 0%,
+        rgba(155, 0, 250, 1) 100%
+    );
+    color: #fff;
+    text-transform: capitalize;
+    margin: 10px 15px;
+    border-radius: 50px;
+    padding: 3px 15px;
+}
+
+.new-room-players__button:focus {
+    outline: 0;
+}
+
+.new-room-players__text {
+    margin: 10px 15px;
 }

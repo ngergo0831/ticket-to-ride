@@ -1,0 +1,13 @@
+.game-layout{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows : auto;
+    grid-template-areas:
+    "players map map deck"
+    "players map map deck"
+    ". cards cards profile";
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}

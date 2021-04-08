@@ -1,3 +1,5 @@
-.game-cards{
+.game-cards {
     grid-area: cards;
+    width: 100%;
+    justify-self: center;
 }

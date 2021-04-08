@@ -1773,7 +1773,9 @@ export const ticketToRideData = {
       "fromCity": "Frankfurt",
       "toCity": "Smolensk",
       "value": "13",
-    },
+    }
+  },
+  longDestinations: {
     "41": {
       "id": "41",
       "from": "22",

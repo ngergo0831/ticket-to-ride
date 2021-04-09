@@ -1,0 +1,22 @@
+.game-cards {
+    grid-area: cards;
+    height: 100%;
+    justify-self: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.train-card {
+    text-align: center;
+    align-self: center;
+    width: 107px;
+    height: 190px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 70px 10px;
+    margin: 10px 5px;
+    background-color: #161a2b;
+}

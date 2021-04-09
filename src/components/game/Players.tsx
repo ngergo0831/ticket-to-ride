@@ -10,6 +10,8 @@ function Players() {
                 <Player />
                 <Player />
                 <Player />
+                <Player />
+                <Player />
             </div>
         </div>
     );

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
+import "./await.css";
+
 function Await() {
     const [submitted, setSubmitted] = useState(false);
     const connectRoom = (e: any) => {
@@ -18,12 +20,12 @@ function Await() {
         );
     }
     return (
-        <>
+        <div className="awaiting">
             <div>Waiting for players to connect.</div>
             <button className="home-btn edit" onClick={connectRoom}>
                 Tovább a játékra
             </button>
-        </>
+        </div>
     );
 }
 

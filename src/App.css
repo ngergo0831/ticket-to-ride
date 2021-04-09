@@ -12,3 +12,19 @@ body {
         rgba(100, 115, 255, 1) 100%
     );
 }
+
+html, body{
+    height: 100%;
+    position: relative;
+}
+
+.game-notFound {
+    height: 100vh;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5.5em;
+}

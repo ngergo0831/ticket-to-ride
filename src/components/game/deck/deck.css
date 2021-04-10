@@ -1,4 +1,4 @@
-.game-deck {
+/*.game-deck {
     grid-area: deck;
     width: 100%;
     height: 100%;
@@ -17,6 +17,63 @@
     border-radius: 20px;
     padding: 30px;
     margin: 10px 50px;
+    margin-bottom: 30px;
+    background-color: #161a2b;
+}
+
+.deck-cards-flex {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.deck-card {
+    min-width: 220px;
+    text-align: center;
+    align-self: center;
+    max-width: 300px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 5px 50px;
+    background-color: #161a2b;
+}
+
+.deck-train {
+    text-align: center;
+    align-self: center;
+    min-width: 220px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 10px 50px;
+    margin-top: 30px;
+    background-color: #161a2b;
+}
+*/
+
+.game-deck {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.deck-ticket {
+    text-align: center;
+    align-self: center;
+    min-width: 220px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 0px 50px;
     margin-bottom: 30px;
     background-color: #161a2b;
 }

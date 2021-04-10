@@ -1,7 +1,13 @@
-.game-destinations {
+/*.game-destinations {
     grid-area: destinations;
     margin: auto;
     padding: auto;
+    align-self: center;
+    justify-self: center;
+}*/
+
+.game-destinations {
+    /* grid-area: destinations; */
     align-self: center;
     justify-self: center;
 }

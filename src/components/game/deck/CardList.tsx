@@ -1,5 +1,5 @@
-import React from 'react'
-import DeckCard from './DeckCard'
+import React from "react";
+import DeckCard from "./DeckCard";
 
 function CardList() {
     return (
@@ -10,7 +10,7 @@ function CardList() {
             <DeckCard />
             <DeckCard />
         </div>
-    )
+    );
 }
 
-export default CardList
+export default CardList;

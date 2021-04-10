@@ -9,13 +9,25 @@ import Destinations from "./Destinations";
 
 function Game() {
     return (
-        <div className="game-layout">
-            <Players />
-            <Map />
-            <Deck />
-            <Destinations />
-            <Cards />
-            <Profile />
+        //<div className="game-layout">
+        //    <Players />
+        //    <Map />
+        //    <Deck />
+        //    <Destinations />
+        //    <Cards />
+        //    <Profile />
+        //</div>
+        <div className="main-layout">
+            <div className="game-main-layout">
+                <Players />
+                <Map />
+                <Deck />
+            </div>
+            <div className="cards">
+                <Destinations />
+                <Cards />
+                <Profile />
+            </div>
         </div>
     );
 }

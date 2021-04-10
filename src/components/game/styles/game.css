@@ -1,4 +1,4 @@
-.game-layout {
+/*.game-layout {
     display: grid;
     grid-template-columns: auto 1fr 1fr auto;
     grid-template-rows: auto;
@@ -7,8 +7,20 @@
         "players map map deck"
         "destinations cards cards profile";
     justify-items: center;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
+    align-items: start;
     text-align: center;
+}*/
+
+.main-layout {
+}
+
+.game-main-layout {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.cards {
+    display: flex;
 }

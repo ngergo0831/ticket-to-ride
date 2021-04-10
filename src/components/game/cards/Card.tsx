@@ -1,11 +1,11 @@
-import React from 'react'
+import { images } from "../../../Images";
 
-function Card() {
+function Card(props: any) {
     return (
         <div className="train-card">
-            Színes vagon kártya
+            <img src={images["black"]} alt="sihuhu" />
         </div>
-    )
+    );
 }
 
-export default Card
+export default Card;

@@ -1,7 +1,5 @@
 .game-cards {
-    grid-area: cards;
-    height: 100%;
-    width: 80%;
+    max-width: fit-content;
     justify-self: center;
     display: flex;
     justify-content: center;
@@ -11,13 +9,16 @@
 }
 
 .train-card {
-    text-align: center;
+    width: 130px;
     align-self: center;
-    width: 107px;
-    height: 190px;
     border: 1px solid black;
-    border-radius: 20px;
-    padding: 70px 10px;
-    margin: 10px 5px;
+    border-radius: 10px;
+    margin: 20px 5px;
     background-color: #161a2b;
+}
+
+.train-card img {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
 }

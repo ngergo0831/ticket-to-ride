@@ -1,0 +1,34 @@
+.main-layout {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: space-between;
+    text-align: center;
+    height: 100vh;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.center-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}

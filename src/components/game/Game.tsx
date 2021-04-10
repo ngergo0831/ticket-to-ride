@@ -1,31 +1,25 @@
 import React from "react";
 import Cards from "./cards/Cards";
 import Deck from "./deck/Deck";
-import Players from "./Players";
-import Profile from "./Profile";
-import Map from "./Map";
-import "./styles/game.css";
-import Destinations from "./Destinations";
+import Players from "./players/Players";
+import Profile from "./profile/Profile";
+import Map from "./map/Map";
+import "./game.css";
+import Destinations from "./destinations/Destinations";
 
 function Game() {
     return (
-        //<div className="game-layout">
-        //    <Players />
-        //    <Map />
-        //    <Deck />
-        //    <Destinations />
-        //    <Cards />
-        //    <Profile />
-        //</div>
         <div className="main-layout">
-            <div className="game-main-layout">
+            <div className="left-side">
                 <Players />
-                <Map />
-                <Deck />
-            </div>
-            <div className="cards">
                 <Destinations />
+            </div>
+            <div className="center-side">
+                <Map />
                 <Cards />
+            </div>
+            <div className="right-side">
+                <Deck />
                 <Profile />
             </div>
         </div>

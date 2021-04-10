@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/profile.css";
+import "./profile.css";
 
 function Profile() {
     return <div className="game-profile">Current player name</div>;

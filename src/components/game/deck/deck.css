@@ -64,6 +64,7 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    max-width: fit-content;
 }
 
 .deck-ticket {
@@ -73,7 +74,7 @@
     border: 1px solid black;
     border-radius: 20px;
     padding: 30px;
-    margin: 0px 50px;
+    margin: 0px 20px;
     margin-bottom: 30px;
     background-color: #161a2b;
 }
@@ -90,15 +91,21 @@
 }
 
 .deck-card {
-    min-width: 220px;
-    text-align: center;
-    align-self: center;
-    max-width: 300px;
+    max-width: 220px;
+    max-height: 80px;
     border: 1px solid black;
     border-radius: 20px;
-    padding: 30px;
-    margin: 5px 50px;
+    margin: 5px 20px;
     background-color: #161a2b;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.deck-card img {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
 }
 
 .deck-train {
@@ -108,7 +115,7 @@
     border: 1px solid black;
     border-radius: 20px;
     padding: 30px;
-    margin: 10px 50px;
+    margin: 10px 20px;
     margin-top: 30px;
     background-color: #161a2b;
 }

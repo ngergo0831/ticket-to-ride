@@ -1,9 +1,10 @@
 .game-cards {
     grid-area: cards;
     height: 100%;
+    width: 80%;
     justify-self: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     align-content: center;
     text-align: center;

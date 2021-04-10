@@ -5,6 +5,7 @@ import Players from "./Players";
 import Profile from "./Profile";
 import Map from "./Map";
 import "./styles/game.css";
+import Destinations from "./Destinations";
 
 function Game() {
     return (
@@ -12,6 +13,7 @@ function Game() {
             <Players />
             <Map />
             <Deck />
+            <Destinations />
             <Cards />
             <Profile />
         </div>

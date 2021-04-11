@@ -2,6 +2,7 @@ import { images } from "../../../Images";
 
 type CardType = {
     color?: string;
+    key?: number;
 };
 
 type Colors =

@@ -23,7 +23,7 @@ function Cards() {
     return (
         <div className="game-cards">
             {[...Array(9)].map((x, i) => (
-                <Card color={cards[i]} />
+                <Card color={cards[i]} key={i} />
             ))}
         </div>
     );

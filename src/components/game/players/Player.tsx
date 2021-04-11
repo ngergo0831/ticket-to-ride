@@ -5,6 +5,7 @@ type PlayerProp = {
     vagons?: number;
     card1?: number;
     card2?: number;
+    key?: number;
 };
 
 function Player({

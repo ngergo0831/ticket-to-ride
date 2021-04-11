@@ -31,6 +31,7 @@ function Players() {
                     vagons={players[i].vagons}
                     card1={players[i].card1}
                     card2={players[i].card2}
+                    key={i}
                 />
             ))}
         </div>

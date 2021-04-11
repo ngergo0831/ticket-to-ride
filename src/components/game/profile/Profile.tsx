@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./profile.css";
 
 function Profile() {
-    return <div className="game-profile">Current player name</div>;
+    // eslint-disable-next-line
+    const [player, setPlayer] = useState("Current player name");
+    return <div className="game-profile">{player}</div>;
 }
 
 export default Profile;

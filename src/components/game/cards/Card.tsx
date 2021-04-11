@@ -1,9 +1,23 @@
 import { images } from "../../../Images";
 
-function Card(props: any) {
+type CardType = {
+    color?: string;
+};
+
+type Colors =
+    | "white"
+    | "orange"
+    | "blue"
+    | "black"
+    | "yellow"
+    | "red"
+    | "purple"
+    | "green";
+
+function Card({ color = "black" }: CardType) {
     return (
         <div className="train-card">
-            <img src={images["black"]} alt="sihuhu" />
+            <img src={images[color as Colors]} alt="sihuhu" />
         </div>
     );
 }

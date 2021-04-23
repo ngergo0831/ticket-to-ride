@@ -1,24 +1,12 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { FC } from "react";
+import { useHistory } from "react-router-dom";
 
-function ConnectRoom() {
-    const [submitted, setSubmitted] = useState(false);
-    const connectRoom = (e: any) => {
-        e.preventDefault();
-        setSubmitted(true);
-    };
-    if (submitted) {
-        return (
-            <Redirect
-                push
-                to={{
-                    pathname: "/awaiting",
-                }}
-            />
-        );
-    }
+export const ConnectRoom: FC = () => {
+    const history = useHistory();
+    const handleSubmit = () => history.push("/awaiting");
+
     return (
-        <form className="new-room" onSubmit={connectRoom}>
+        <form className="new-room" onSubmit={handleSubmit}>
             <div className="new-room-title">Csatlakozás a szobához</div>
             <div className="new-room-input">
                 <div className="new-room-input-items new-room-text">
@@ -48,6 +36,4 @@ function ConnectRoom() {
             </button>
         </form>
     );
-}
-
-export default ConnectRoom;
+};

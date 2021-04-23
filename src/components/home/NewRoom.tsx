@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { modifyPlayerCount } from "../../state/actions";
+import { countPlayers } from "../../state/selectors";
 
 const NewRoom = () => {
-    const [players, setPlayers] = useState(1);
+    /*const [players, setPlayers] = useState(1);
     const plusPlayer = (e: any) => {
         e.preventDefault();
         if (players < 5) {
@@ -20,37 +22,32 @@ const NewRoom = () => {
         if (players === 1) {
             //disable button minus
         }
-    };
-    const [submitted, setSubmitted] = useState(false);
-    const createRoom = (e: any) => {
-        e.preventDefault();
-        setSubmitted(true);
-    };
-    if (submitted) {
-        return (
-            <Redirect
-                push
-                to={{
-                    pathname: "/awaiting",
-                }}
-            />
-        );
-    }
+    };*/
+    const players = useSelector(countPlayers);
+    const dispatch = useDispatch();
+    
+    const handlePlus = () => dispatch(modifyPlayerCount(1));
+    const handleMinus = () => dispatch(modifyPlayerCount(-1));
+    
+    const history = useHistory();
+    const handleSubmit = () => history.push("/awaiting");
     return (
-        <form className="new-room" onSubmit={createRoom}>
+        <form className="new-room" onSubmit={handleSubmit}>
             <div className="new-room-title">Új szoba létrehozása</div>
             <div>Játékosok száma:</div>
             <div className="new-room-players">
                 <button
+                    type="button"
                     className="new-room-players__button"
-                    onClick={minusPlayer}
+                    onClick={handleMinus}
                 >
                     -
                 </button>
                 <div className="new-room-players__text">{players}</div>
                 <button
+                    type="button"
                     className="new-room-players__button pluss"
-                    onClick={plusPlayer}
+                    onClick={handlePlus}
                 >
                     +
                 </button>
@@ -65,9 +62,7 @@ const NewRoom = () => {
                     className="home-input edit new-room-input-items"
                 />
             </div>
-            <button className="home-btn edit" onClick={createRoom}>
-                Létrehozás
-            </button>
+            <button className="home-btn edit">Létrehozás</button>
         </form>
     );
 };

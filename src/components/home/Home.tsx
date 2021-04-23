@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "./Logo";
 import "./home.css";
 import NewRoom from "./NewRoom";
-import ConnectRoom from "./ConnectRoom";
+import {ConnectRoom} from "./ConnectRoom";
 import { Redirect } from "react-router-dom";
 
 function Home() {

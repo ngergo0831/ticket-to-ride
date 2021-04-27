@@ -1,36 +1,27 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { modifyPlayerCount } from "../../state/actions";
+import { createRoom, modifyPlayerCount } from "../../state/actions";
 import { countPlayers } from "../../state/selectors";
 
 const NewRoom = () => {
-    /*const [players, setPlayers] = useState(1);
-    const plusPlayer = (e: any) => {
-        e.preventDefault();
-        if (players < 5) {
-            setPlayers(players + 1);
-        }
-        if (players === 5) {
-            //disable button plus
-        }
-    };
-    const minusPlayer = (e: any) => {
-        e.preventDefault();
-        if (players > 1) {
-            setPlayers(players - 1);
-        }
-        if (players === 1) {
-            //disable button minus
-        }
-    };*/
-    const players = useSelector(countPlayers);
+    const [name, setName] = useState("");
+    const playerNumber = useSelector(countPlayers);
+
     const dispatch = useDispatch();
-    
-    const handlePlus = () => dispatch(modifyPlayerCount(1));
-    const handleMinus = () => dispatch(modifyPlayerCount(-1));
-    
+
+    const handlePlus = () => {
+        if (playerNumber < 5) dispatch(modifyPlayerCount(1));
+    };
+    const handleMinus = () => {
+        if (playerNumber > 1) dispatch(modifyPlayerCount(-1));
+    };
+
     const history = useHistory();
-    const handleSubmit = () => history.push("/awaiting");
+    const handleSubmit = () => {
+        dispatch(createRoom(name, playerNumber));
+        history.push("/awaiting");
+    };
     return (
         <form className="new-room" onSubmit={handleSubmit}>
             <div className="new-room-title">Új szoba létrehozása</div>
@@ -43,7 +34,7 @@ const NewRoom = () => {
                 >
                     -
                 </button>
-                <div className="new-room-players__text">{players}</div>
+                <div className="new-room-players__text">{playerNumber}</div>
                 <button
                     type="button"
                     className="new-room-players__button pluss"
@@ -57,8 +48,13 @@ const NewRoom = () => {
                     Becenév:
                 </div>
                 <input
+                    name="nickname"
                     type="text"
                     maxLength={14}
+                    value={name}
+                    onChange={(e) => {
+                        setName(e.target.value);
+                    }}
                     className="home-input edit new-room-input-items"
                 />
             </div>

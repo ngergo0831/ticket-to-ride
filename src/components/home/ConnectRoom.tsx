@@ -3,7 +3,10 @@ import { useHistory } from "react-router-dom";
 
 export const ConnectRoom: FC = () => {
     const history = useHistory();
-    const handleSubmit = () => history.push("/awaiting");
+    const handleSubmit = () => {
+        //becenvév, newPlayer->gameState
+        history.push("/awaiting")
+    };
 
     return (
         <form className="new-room" onSubmit={handleSubmit}>

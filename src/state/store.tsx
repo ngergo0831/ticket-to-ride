@@ -1,9 +1,15 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
-import { playerCountReducer } from "./reducer";
+import {
+    playerCountReducer,
+    /* gameStateReducer,*/ menuStateReducer,
+} from "./reducer";
 
-const rootReducer = combineReducers({ playerCountReducer });
+const rootReducer = combineReducers({
+    playerCountReducer,
+    /*gameStateReducer,*/ menuStateReducer,
+});
 
 const logger = createLogger({
     collapsed: true,

@@ -13,7 +13,8 @@ type Colors =
     | "yellow"
     | "red"
     | "purple"
-    | "green";
+    | "green"
+    | "wagon";
 
 function Card({ color = "black" }: CardType) {
     return (

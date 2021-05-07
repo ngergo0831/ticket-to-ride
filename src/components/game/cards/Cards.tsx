@@ -1,30 +1,18 @@
-import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { getUserWagons } from "../../../state/selectors";
 import Card from "./Card";
 import "./cards.css";
 
 function Cards() {
-    let colors = [
-        "white",
-        "orange",
-        "blue",
-        "black",
-        "yellow",
-        "red",
-        "purple",
-        "green",
-    ];
+    let cards = useSelector(getUserWagons);
 
-    let cards: string[] = [];
-    for (let i = 0; i < 9; i++) {
-        cards.push(colors[Math.floor(Math.random() * colors.length)]);
-    }
     // eslint-disable-next-line
-    const [players, setPlayers] = useState<string[]>(cards);
+
     return (
         <div className="game-cards">
-            {[...Array(9)].map((x, i) => (
-                <Card color={cards[i]} key={i} />
-            ))}
+            {cards?.map((x, i) =>
+                cards ? <Card color={cards[i]?.color} key={i} /> : ""
+            )}
         </div>
     );
 }

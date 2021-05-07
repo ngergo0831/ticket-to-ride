@@ -10,16 +10,20 @@ import {
 export type WagonCard = { color: string };
 
 export type DestinationCard = {
+    id: string;
     from: string;
     to: string;
-    value: number;
+    fromCity: string;
+    toCity: string;
+    value: string;
 };
 
 export type Player = {
     name: string;
     id: number;
     isOwner: boolean;
-    destCards?: DestinationCard[];
+    shortDestCards?: DestinationCard[];
+    longDestCards?: DestinationCard[];
     wagonCards?: WagonCard[];
     points?: number;
     wagons?: number;
@@ -34,6 +38,10 @@ export const examplePlayer = {
 
 export type GameState = {
     players: Player[];
+    currentPlayer?: Player;
+    shortDestinationCards?: DestinationCard[];
+    longDestinationCards?: DestinationCard[];
+    wagonCards?: WagonCard[];
     winner: Player | null;
     gameStatus: Status;
     maxPlayers: number;

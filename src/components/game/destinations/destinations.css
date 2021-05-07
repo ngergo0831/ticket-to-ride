@@ -1,4 +1,9 @@
 .game-destinations {
     max-width: fit-content;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+.dest-title {
+    color: red;
 }

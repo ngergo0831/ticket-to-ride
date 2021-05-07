@@ -1,18 +1,18 @@
-import React from "react";
-
 type PlayerProp = {
     name?: string;
     vagons?: number;
     card1?: number;
     card2?: number;
+    card3?: number;
     key?: number;
 };
 
 function Player({
     name = "Player",
-    vagons = 35,
+    vagons = 45,
     card1 = 10,
     card2 = 4,
+    card3 = 1,
 }: PlayerProp) {
     return (
         <div className="player-title-box">
@@ -21,6 +21,7 @@ function Player({
                 <div className="player-title__vagons">{vagons}</div>
                 <div className="player-title__card1">{card1}</div>
                 <div className="player-title__card2">{card2}</div>
+                <div className="player-title__card2">{card3}</div>
             </div>
         </div>
     );

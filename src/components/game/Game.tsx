@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Cards from "./cards/Cards";
 import Deck from "./deck/Deck";
 import Players from "./players/Players";
@@ -8,6 +8,19 @@ import "./game.css";
 import Destinations from "./destinations/Destinations";
 
 function Game() {
+    useEffect(() => {
+        window.onbeforeunload = function () {
+            console.log(
+                "If you refresh then the game might broke. So pls no. 🥺"
+            );
+            return true;
+        };
+
+        return () => {
+            window.onbeforeunload = null;
+        };
+    }, []);
+
     return (
         <div className="main-layout">
             <div className="left-side">

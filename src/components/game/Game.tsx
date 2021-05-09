@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Cards from "./cards/Cards";
 import Deck from "./deck/Deck";
 import Players from "./players/Players";

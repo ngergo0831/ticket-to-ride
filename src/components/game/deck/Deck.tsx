@@ -1,15 +1,24 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { drawFromDeck } from "../../../state/actions";
+import { getWagonDeck } from "../../../state/selectors";
 import CardList from "./CardList";
-import DeckTicket from "./DeckTicket";
-import DeckTrain from "./DeckTrain";
 import "./deck.css";
 
 function Deck() {
+    const wagonDeck = useSelector(getWagonDeck);
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(drawFromDeck('',0));
+    };
+
     return (
         <div className="game-deck">
-            <DeckTicket />
+            <div className="h4">Remaining cards: {wagonDeck?.length}</div>
             <CardList />
-            <DeckTrain />
+            <button className="btn btn-dark mt-3 p-2" onClick={handleClick}>
+                Draw from the deck
+            </button>
         </div>
     );
 }

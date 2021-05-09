@@ -28,5 +28,8 @@ export const getCurrentPlayer = ({ menuStateReducer }: MenuState) =>
 
 export const getUserWagons = ({ menuStateReducer }: MenuState) =>
     menuStateReducer.players.find(
-        (element) => element === menuStateReducer.currentPlayer
+        (element) => element.id === menuStateReducer.currentPlayer?.id
     )?.wagonCards;
+
+export const getOnFieldCards = ({ menuStateReducer }: MenuState) =>
+    menuStateReducer.onFieldWagonCards;

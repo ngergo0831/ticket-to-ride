@@ -18,6 +18,12 @@ export type DestinationCard = {
     value: string;
 };
 
+export enum PlayerStatus {
+    BEGIN,
+    DRAW1,
+    END,
+}
+
 export type Player = {
     name: string;
     id: number;
@@ -28,6 +34,7 @@ export type Player = {
     points?: number;
     wagons?: number;
     round?: number;
+    status?: PlayerStatus;
 };
 
 export const examplePlayer = {
@@ -42,6 +49,7 @@ export type GameState = {
     shortDestinationCards?: DestinationCard[];
     longDestinationCards?: DestinationCard[];
     wagonCards?: WagonCard[];
+    onFieldWagonCards?: WagonCard[];
     winner: Player | null;
     gameStatus: Status;
     maxPlayers: number;

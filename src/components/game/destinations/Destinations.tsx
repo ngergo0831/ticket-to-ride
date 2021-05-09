@@ -12,13 +12,13 @@ function Destinations() {
             <div className="dest-title">Current short destinations: </div>
             {player?.shortDestCards?.map((element, index) => (
                 <div key={index}>
-                    {element.fromCity} - {element.toCity}
+                    {element?.fromCity} - {element?.toCity}
                 </div>
             ))}
             <div className="dest-title">Current long destinations: </div>
             {player?.longDestCards?.map((element, index) => (
                 <div key={index}>
-                    {element.fromCity} - {element.toCity}
+                    {element?.fromCity} - {element?.toCity}
                 </div>
             ))}
         </div>

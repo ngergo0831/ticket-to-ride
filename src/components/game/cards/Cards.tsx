@@ -1,18 +1,15 @@
 import { useSelector } from "react-redux";
 import { getUserWagons } from "../../../state/selectors";
 import Card from "./Card";
+import { v4 } from "uuid";
 import "./cards.css";
 
 function Cards() {
     let cards = useSelector(getUserWagons);
 
-    // eslint-disable-next-line
-
     return (
         <div className="game-cards">
-            {cards?.map((x, i) =>
-                cards ? <Card color={cards[i]?.color} key={i} /> : ""
-            )}
+            {cards && cards.map((x) => <Card color={x.color} key={v4()} />)}
         </div>
     );
 }

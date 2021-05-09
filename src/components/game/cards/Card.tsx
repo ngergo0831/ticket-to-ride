@@ -2,7 +2,7 @@ import { images } from "../../../Images";
 
 type CardType = {
     color?: string;
-    key?: number;
+    key?: string;
 };
 
 type Colors =
@@ -19,7 +19,7 @@ type Colors =
 function Card({ color = "black" }: CardType) {
     return (
         <div className="train-card">
-            <img src={images[color as Colors]} alt="sihuhu" />
+            <img src={images[color as Colors]} alt={"sihuhu"} />
         </div>
     );
 }

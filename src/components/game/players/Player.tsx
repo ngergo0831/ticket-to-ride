@@ -19,8 +19,8 @@ function Player({
             <div className="player-title">{name}</div>
             <div className="player-title__flex">
                 <div className="player-title__vagons">{vagons}</div>
-                <div className="player-title__card1">{card1}</div>
-                <div className="player-title__card2">{card2}</div>
+                <div className="player-title__card1">{card2}</div>
+                <div className="player-title__card2">{card1}</div>
                 <div className="player-title__card2">{card3}</div>
             </div>
         </div>

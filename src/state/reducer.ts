@@ -14,6 +14,7 @@ import {
     NEW_GAME,
     GAME_STARTED,
     DRAW_DECK_CARD,
+    DRAW_CARD,
 } from "./actions";
 
 export const playerCountReducer = (state = 1, action: ModifyPlayerCount) => {
@@ -25,15 +26,6 @@ export const playerCountReducer = (state = 1, action: ModifyPlayerCount) => {
 
     return state;
 };
-/*
-export const gameStateReducer = (
-    state = initialGameState,
-    action: GameActions
-) => {
-    const { type, payload } = action;
-
-    return state;
-};*/
 
 export const menuStateReducer = (
     state = initialGameState,
@@ -147,6 +139,66 @@ export const menuStateReducer = (
                 }
                 return e;
             });
+            state.currentPlayer.status = PlayerStatus.END;
+            state.currentPlayer =
+                state.players[(id + 1) % state.players.length];
+            state.currentPlayer.status = PlayerStatus.BEGIN;
+        }
+        state = JSON.parse(JSON.stringify(state));
+        return state;
+    }
+
+    if (type === DRAW_CARD) {
+        const { num } = payload as InitType;
+        if (state.currentPlayer?.status === PlayerStatus.BEGIN) {
+            let id: number = 0;
+            if (state.onFieldWagonCards && state.wagonCards) {
+                state.currentPlayer?.wagonCards?.push(
+                    JSON.parse(JSON.stringify(state.onFieldWagonCards[num]))
+                );
+                state.onFieldWagonCards[num] = state.wagonCards[0];
+                state.wagonCards = state.wagonCards.slice(
+                    1,
+                    state.wagonCards.length
+                );
+                state.players.forEach((e, i) => {
+                    if (e.id === state.currentPlayer?.id) {
+                        id = i;
+                        e.wagonCards = state.currentPlayer?.wagonCards;
+                    }
+                });
+            }
+            if (
+                state.currentPlayer.wagonCards &&
+                state.currentPlayer.wagonCards[
+                    state.currentPlayer.wagonCards.length - 1
+                ].color === "wagon"
+            ) {
+                state.currentPlayer.status = PlayerStatus.END;
+                state.currentPlayer =
+                    state.players[(id + 1) % state.players.length];
+                state.currentPlayer.status = PlayerStatus.BEGIN;
+            } else {
+                state.currentPlayer.status = PlayerStatus.DRAW1;
+            }
+        } else if (state.currentPlayer?.status === PlayerStatus.DRAW1) {
+            let id: number = 0;
+            if (state.onFieldWagonCards && state.wagonCards) {
+                state.currentPlayer?.wagonCards?.push(
+                    JSON.parse(JSON.stringify(state.onFieldWagonCards[num]))
+                );
+                state.onFieldWagonCards[num] = state.wagonCards[0];
+                state.wagonCards = state.wagonCards.slice(
+                    1,
+                    state.wagonCards.length
+                );
+                state.players.forEach((e, i) => {
+                    if (e.id === state.currentPlayer?.id) {
+                        id = i;
+                        e.wagonCards = state.currentPlayer?.wagonCards;
+                    }
+                });
+            }
             state.currentPlayer.status = PlayerStatus.END;
             state.currentPlayer =
                 state.players[(id + 1) % state.players.length];

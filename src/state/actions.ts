@@ -34,3 +34,11 @@ export const drawFromDeck = (name: string, num: number) => {
         payload: { player, num },
     };
 };
+
+export const drawCard = (name: string, num: number) => {
+    const player: Player = { name, id: 1, isOwner: true };
+    return {
+        type: DRAW_CARD,
+        payload: { player, num },
+    };
+};

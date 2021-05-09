@@ -1,6 +1,5 @@
-import React from "react";
 import "./map.css";
-import map from "../../../res/map.jpg";
+import map from "../../../res/map.png";
 import { ticketToRideData } from "../../../res/ticket-to-ride-data";
 
 type Numbers =

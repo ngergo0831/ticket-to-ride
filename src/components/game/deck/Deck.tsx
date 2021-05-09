@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { drawFromDeck } from "../../../state/actions";
-import { getWagonDeck } from "../../../state/selectors";
+import { getCurrentPlayer, getWagonDeck } from "../../../state/selectors";
 import CardList from "./CardList";
 import "./deck.css";
 
 function Deck() {
     const wagonDeck = useSelector(getWagonDeck);
+    const userCards = useSelector(getCurrentPlayer)?.wagonCards?.length;
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(drawFromDeck('',0));
+        if (userCards && userCards < 9) dispatch(drawFromDeck("", 0));
     };
 
     return (

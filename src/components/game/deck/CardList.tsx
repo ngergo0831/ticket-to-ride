@@ -8,8 +8,12 @@ function CardList() {
     return (
         <div className="deck-cards-flex">
             {onFieldCards &&
-                onFieldCards.map((x) => (
-                    <DeckCard color={x.color + "_r"} key={v4()} />
+                onFieldCards.map((x, i) => (
+                    <DeckCard
+                        color={x.color + "_r"}
+                        key={v4()}
+                        clicked={i}
+                    />
                 ))}
         </div>
     );

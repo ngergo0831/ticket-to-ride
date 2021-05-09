@@ -10,3 +10,8 @@
     width: 80%;
     border: 3px solid black;
 }
+
+.point {
+    position: absolute;
+    color: black;
+}

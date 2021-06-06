@@ -1,7 +1,7 @@
 Nagy Gergő  
 CS4LP6  
 Kliensoldali webprogramozás  
-2021.04.11  
+2021.06.06  
 Ezt a megoldást Nagy Gergő, CS4LP6 küldte be és készítette a Kliensoldali webprogramozás kurzus Ticket-to-ride feladatához.
 Kijelentem, hogy ez a megoldás a saját munkám.
 Nem másoltam vagy használtam harmadik féltől származó megoldásokat.

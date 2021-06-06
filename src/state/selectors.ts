@@ -26,9 +26,14 @@ export const getLongDeck = ({ menuStateReducer }: MenuState) =>
 export const getCurrentPlayer = ({ menuStateReducer }: MenuState) =>
     menuStateReducer.currentPlayer;
 
-export const getUserWagons = ({ menuStateReducer }: MenuState) =>
+export const getClientPlayer= ({ menuStateReducer, playerNameReducer }: MenuState) =>
     menuStateReducer.players.find(
-        (element) => element.id === menuStateReducer.currentPlayer?.id
+        (element) => element.name === playerNameReducer
+    );
+
+export const getUserWagons = ({ menuStateReducer, playerNameReducer }: MenuState) =>
+    menuStateReducer.players.find(
+        (element) => element.name === playerNameReducer
     )?.wagonCards;
 
 export const getOnFieldCards = ({ menuStateReducer }: MenuState) =>

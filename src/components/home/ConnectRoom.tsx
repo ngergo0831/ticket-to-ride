@@ -1,11 +1,36 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import socket from "../../socket";
+import { joinRoom, modifyPlayerName } from "../../state/actions";
 
 export const ConnectRoom: FC = () => {
+    const [name, setName] = useState("");
+    const [roomId, setRoomId] = useState("");
     const history = useHistory();
-    const handleSubmit = () => {
-        //becenvév, newPlayer->gameState
-        history.push("/awaiting")
+    const dispatch = useDispatch();
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        socket.emit("join-room", roomId, (ack: any) => {
+            if (ack.status === "ok") {
+                socket.emit("get-state", roomId, (stateAck: any) => {
+                    if (stateAck.status === "ok") {
+                        const state = JSON.parse(stateAck.state);                        
+                        const syncRoomInfo = {
+                            players: state.players,
+                            maxPlayers: state.maxPlayers,
+                            code: state.code,
+                            name,
+                        };                        
+                        dispatch(joinRoom(syncRoomInfo));
+                        dispatch(modifyPlayerName(name));
+                        history.push("/awaiting");
+                    }
+                });
+            } else {
+                alert(ack.message + " " + roomId);
+            }
+        });
     };
 
     return (
@@ -18,6 +43,10 @@ export const ConnectRoom: FC = () => {
                 <input
                     type="text"
                     maxLength={14}
+                    value={name}
+                    onChange={(e) => {
+                        setName(e.target.value);
+                    }}
                     className="home-input edit new-room-input-items"
                 />
             </div>
@@ -27,7 +56,10 @@ export const ConnectRoom: FC = () => {
                 </div>
                 <input
                     type="text"
-                    maxLength={14}
+                    value={roomId}
+                    onChange={(e) => {
+                        setRoomId(e.target.value);
+                    }}
                     className="home-input edit new-room-input-items"
                 />
             </div>

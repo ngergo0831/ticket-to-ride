@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getCurrentPlayer } from "../../../state/selectors";
+import { getClientPlayer } from "../../../state/selectors";
 
 import "./destinations.css";
 
 function Destinations() {
-    const player = useSelector(getCurrentPlayer);
+    const player = useSelector(getClientPlayer);
 
     return (
         <div className="game-destinations">

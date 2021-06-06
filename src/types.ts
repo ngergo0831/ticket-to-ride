@@ -1,9 +1,11 @@
 import {
     BUILD_LINE,
     DRAW_CARDS,
+    JOIN_ROOM_TYPE,
     ModifyPlayerCount,
     NEW_DESTINATIONS,
     NEW_GAME,
+    UPDATE_GAME_STATE_TYPE,
     USER_BEGIN,
 } from "./interfaces";
 
@@ -26,7 +28,7 @@ export enum PlayerStatus {
 
 export type Player = {
     name: string;
-    id: number;
+    id: string;
     isOwner: boolean;
     shortDestCards?: DestinationCard[];
     longDestCards?: DestinationCard[];
@@ -72,14 +74,23 @@ export const initialGameState: GameState = {
 
 export type MenuState = {
     menuStateReducer: GameState;
+    playerNameReducer?: string;
 };
 
 export type PlayerCount = {
     playerCountReducer: number;
 };
 
+export type PlayerName = {
+    playerNameReducer: string;
+};
+
 export type END_GAME = DRAW_CARDS | BUILD_LINE | NEW_DESTINATIONS;
 
-export type MenuActions = ModifyPlayerCount | NEW_GAME;
+export type MenuActions =
+    | ModifyPlayerCount
+    | NEW_GAME
+    | JOIN_ROOM_TYPE
+    | UPDATE_GAME_STATE_TYPE;
 
 export type GameActions = USER_BEGIN | END_GAME;

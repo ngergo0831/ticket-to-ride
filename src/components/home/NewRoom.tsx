@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createRoom, modifyPlayerCount } from "../../state/actions";
+import socket from "../../socket";
+import {
+    createRoom,
+    modifyPlayerCount,
+    modifyPlayerName,
+} from "../../state/actions";
 import { countPlayers } from "../../state/selectors";
 
 const NewRoom = () => {
@@ -14,13 +19,24 @@ const NewRoom = () => {
         if (playerNumber < 5) dispatch(modifyPlayerCount(1));
     };
     const handleMinus = () => {
-        if (playerNumber > 1) dispatch(modifyPlayerCount(-1));
+        if (playerNumber > 2) dispatch(modifyPlayerCount(-1));
     };
 
     const history = useHistory();
-    const handleSubmit = () => {
-        dispatch(createRoom(name, playerNumber));
-        history.push("/awaiting");
+    const handleSubmit = (e: any) => {
+        //const roomcode = Math.random().toString(36).substring(7);
+        e.preventDefault();
+        socket.emit("create-room", playerNumber , (ack: any) => {
+            if (ack.status === "ok") {
+                dispatch(modifyPlayerName(name));
+                dispatch(
+                    createRoom({ name, roomsize: playerNumber, roomcode: ack.roomId })
+                );
+                history.push("/awaiting");
+            } else {
+                alert("error creating room");
+            }
+        });
     };
     return (
         <form className="new-room" onSubmit={handleSubmit}>

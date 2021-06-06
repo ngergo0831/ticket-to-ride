@@ -2,12 +2,13 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
 import {
-    playerCountReducer,
+    playerCountReducer, playerNameReducer,
     /* gameStateReducer,*/ menuStateReducer,
 } from "./reducer";
 
 const rootReducer = combineReducers({
     playerCountReducer,
+    playerNameReducer,
     /*gameStateReducer,*/ menuStateReducer,
 });
 

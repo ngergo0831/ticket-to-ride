@@ -1,7 +1,15 @@
-import { InitType, ModifyPlayerCount } from "../interfaces";
+import { v4 } from "uuid";
+import {
+    InitType,
+    ModifyPlayerCount,
+    ModifyPlayerName,
+    NewGameInitWithName,
+} from "../interfaces";
 import { ticketToRideData } from "../res/ticket-to-ride-data";
+import socket from "../socket";
 import {
     DestinationCard,
+    GameState,
     initialGameState,
     MenuActions,
     Player,
@@ -11,17 +19,30 @@ import {
 } from "../types";
 import {
     MODIFY_PLAYER_COUNT,
+    MODIFY_PLAYER_NAME,
     NEW_GAME,
     GAME_STARTED,
     DRAW_DECK_CARD,
     DRAW_CARD,
+    JOIN_ROOM,
+    UPDATE_GAME_STATE,
 } from "./actions";
 
-export const playerCountReducer = (state = 1, action: ModifyPlayerCount) => {
+export const playerCountReducer = (state = 2, action: ModifyPlayerCount) => {
     const { type, payload } = action;
 
     if (type === MODIFY_PLAYER_COUNT) {
         return state + (payload as number);
+    }
+
+    return state;
+};
+
+export const playerNameReducer = (state = "", action: ModifyPlayerName) => {
+    const { type, payload } = action;
+
+    if (type === MODIFY_PLAYER_NAME) {
+        return (state = payload);
     }
 
     return state;
@@ -33,21 +54,53 @@ export const menuStateReducer = (
 ) => {
     const { type, payload } = action;
 
+    if (type === UPDATE_GAME_STATE) {
+        const newState = payload as GameState;
+        return JSON.parse(JSON.stringify(newState));
+    }
+
     if (type === NEW_GAME) {
-        const { player, num } = payload as InitType;
+        const { player, num, code } = payload as InitType;
         const newState = initialGameState;
         let owner: Player = player;
         newState.players.length = 0;
         newState.players.push(owner);
-        newState.players.push({ name: "Dummy_bot", id: 10, isOwner: false });
         newState.currentPlayer = owner;
+        newState.currentPlayer.wagonCards = [];
         newState.currentPlayer.status = PlayerStatus.BEGIN;
         newState.gameStatus = Status.WAITING_FOR_PLAYERS;
         newState.maxPlayers = num;
-        newState.code = Math.random().toString(36).substring(7);
+        newState.code = code;
+        socket.emit(
+            "sync-state",
+            newState.code,
+            newState,
+            true,
+            (ack: any) => {}
+        );
         return newState;
     }
 
+    if (type === JOIN_ROOM) {
+        const { players, maxPlayers, code, name } =
+            payload as NewGameInitWithName;
+        let newState = state;
+        newState.players = players;
+        newState.maxPlayers = maxPlayers;
+        newState.code = code;
+        newState.currentPlayer = players[0];
+        newState.gameStatus = Status.WAITING_FOR_PLAYERS;
+        newState.currentPlayer.status = PlayerStatus.BEGIN;
+        newState.players?.push({ name, id: v4(), isOwner: false });
+        socket.emit(
+            "sync-state",
+            newState.code,
+            newState,
+            true,
+            (ack: any) => {}
+        );
+        return newState;
+    }
     if (type === GAME_STARTED) {
         state.shortDestinationCards = generateShortDestinationCards();
         state.longDestinationCards = generateLongDestinationCards();
@@ -87,10 +140,11 @@ export const menuStateReducer = (
                         )
                     );
                 }
-                state.shortDestinationCards = state.shortDestinationCards?.slice(
-                    5,
-                    state.shortDestinationCards.length
-                );
+                state.shortDestinationCards =
+                    state.shortDestinationCards?.slice(
+                        5,
+                        state.shortDestinationCards.length
+                    );
             }
             element.longDestCards = [];
             if (state.longDestinationCards) {
@@ -106,13 +160,15 @@ export const menuStateReducer = (
             element.points = 0;
         });
         state.gameStatus = Status.IN_GAME;
+        if(state.currentPlayer?.wagonCards) state.currentPlayer.wagonCards  = JSON.parse(JSON.stringify(state.players[0].wagonCards));
+        socket.emit("sync-state", state.code, state, true, (ack: any) => {});
         return state;
     }
 
     if (type === DRAW_DECK_CARD) {
         if (state.currentPlayer?.status === PlayerStatus.BEGIN) {
             state.players = state.players.map((e) => {
-                if (e.id === state.currentPlayer?.id && state.wagonCards) {
+                if (e.name === state.currentPlayer?.name && state.wagonCards) {
                     e.wagonCards?.push(
                         JSON.parse(JSON.stringify(state.wagonCards[0]))
                     );
@@ -127,7 +183,7 @@ export const menuStateReducer = (
         } else if (state.currentPlayer?.status === PlayerStatus.DRAW1) {
             let id: number = 0;
             state.players = state.players.map((e, i) => {
-                if (e.id === state.currentPlayer?.id && state.wagonCards) {
+                if (e.name === state.currentPlayer?.name && state.wagonCards) {
                     id = i;
                     e.wagonCards?.push(
                         JSON.parse(JSON.stringify(state.wagonCards[0]))
@@ -145,6 +201,7 @@ export const menuStateReducer = (
             state.currentPlayer.status = PlayerStatus.BEGIN;
         }
         state = JSON.parse(JSON.stringify(state));
+        socket.emit("sync-state", state.code, state, true, (ack: any) => {});
         return state;
     }
 
@@ -161,11 +218,13 @@ export const menuStateReducer = (
                     1,
                     state.wagonCards.length
                 );
-                state.players.forEach((e, i) => {
-                    if (e.id === state.currentPlayer?.id) {
+                /***/ state.players = state.players.map((e, i) => {
+                    if (e.name === state.currentPlayer?.name) {
                         id = i;
+                        //nincs wagonCards
                         e.wagonCards = state.currentPlayer?.wagonCards;
                     }
+                    return e;
                 });
             }
             if (
@@ -193,7 +252,7 @@ export const menuStateReducer = (
                     state.wagonCards.length
                 );
                 state.players.forEach((e, i) => {
-                    if (e.id === state.currentPlayer?.id) {
+                    if (e.name === state.currentPlayer?.name) {
                         id = i;
                         e.wagonCards = state.currentPlayer?.wagonCards;
                     }
@@ -203,8 +262,14 @@ export const menuStateReducer = (
             state.currentPlayer =
                 state.players[(id + 1) % state.players.length];
             state.currentPlayer.status = PlayerStatus.BEGIN;
+            state.currentPlayer.wagonCards = JSON.parse(
+                JSON.stringify(
+                    state.players[(id + 1) % state.players.length].wagonCards
+                )
+            );
         }
         state = JSON.parse(JSON.stringify(state));
+        socket.emit("sync-state", state.code, state, true, (ack: any) => {});
         return state;
     }
 
